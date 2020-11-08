@@ -1,4 +1,4 @@
-
+# Reports
 ![](images/Picture1.png)
 1.	Prologue
 
@@ -24,7 +24,7 @@ Operations:
 
 The goal of the mic board is to maximize volt amplitude between0 V and 3.3 V while also reducing setting the DC offset to 1.65 V. The microphone can be modeled as a signal-dependent current source, IMIC = k sin(ωt), where IMIC is the current, k to current conversion ratio, and ω is the signal’s frequency. There is a voltage buffer after the mic board in order to prevent loading. C1 is used to eliminate any DC voltage coming from the first stage and therefore there are only AC signals being passed to the next stage of the mic board circuit. Lastly, we used a gain amplifier to amplify the signal to the desired amplitude. 
 
-# 3.	Schematic
+## 3.	Schematic
 The diagram above is the first part of circuit schematic. It includes the 5V voltage regulator, which is used to power buffers/op-amps as well as the mic-board. We have each pin of the mic-board connected to its allocated lot, as such OS1 and OS2 are connected to the biasing circuit, and we also have the V_out connected to a buffer which has a low-pass filter connected to it as well. Right after the low-pass filter we have our final component, which is the “non-inverting” amplifier. This part was primarily used in part 1 of the lab to regulate how much voltage went to the wheels, and is controlled by the potentiometer (a.k.a. Voltage divider).  For all buffers that do not have a V_DD shown, it is 5V by default, and those that do are specified on top. 
 ![](images/Picture4.png)
 
@@ -33,7 +33,7 @@ The diagram above is the second part of circuit schematics. Here we can see the 
 ![](images/Picture5.png)
 
  
-# 4.	Control
+## 4.	Control
 
 Each wheels has mechanical differences, and for this reason we use two linear models for wheels velocity measured in the following formulas:
 
@@ -81,12 +81,12 @@ And,
 
 As k goes to   we will notice that model mismatch predominates, and to account for this we introduce  . Obviously, STRAIGHT.CORRECTION is very different from this, since it is implemented when the car “thinks” it is going straight, so we tilt it slightly so that it goes “straight” for us.
 
-# 5.	SVD/PCA
+## 5.	SVD/PCA
 
 In this lab we used envelope-based PCA. This is a good choice because it allows us to have an effective yet simple dimensional reduction representation of our data. The initial steps of the implementation of the PCA was aligning and stacking the data. We performed these tasks because our implementation of the PCA does not do very well with delay of and variation of recording. We used the variable  PRELENGTH, which is the number of steps to include before our speech command THRESHOLD is used to determine where our speech command starts, which  is a  function of the relative maximum amplitude of that words recordings and the parameter THRESHOLD(a value between [0,1]. These variables affect the given alignment by viewing different variations in recording as “important” aspects of a given recording. These variations before and during the recordings could lead to misalignment. We then stacked our data and demeaned the data. We demean our data in order to help standardize our data and eventually give better directionality to our principal components . 
 The SVD is written as  . :  The   and   are a set of orthonormal bases, and where   is a matrix of our principle components. Σ is a diagonal matrix where the diagonals are the sqrt(λ) and can be viewed as the “magnitude of the singular values.  We used three singular values for our classification. We did this because the first three principal components had the greatest significance or magnitude. Once we found the most important principle components. We formed a basis with the three principal component vectors. We then projected our data into this basis in order to see how our words differed from each other in this lower dimension. Our classifier would get a new recording project to this basis and find the closest word to this projection. We tuned the classification with variable CLASSIFICATION THRESHOLD and LOUDNESS THRESHOLD. CLASSIFICATION THRESHOLD was used to determine how far a word needed to be from the clusters to be classified as that word. We unfortunately were not able to test our classifier outside of this lab section due to the aforementioned malfunctioning hardware. However, if we had tested the classifier on the car.  Hypothetically, despite classifying 100% of the time in the lab, the classifier may have been dealing with more variation in our speech and environmental factors when in the car and may not have handled all of our classifications requests or may have misclassified . 
 
-# 6.	Integration
+## 6.	Integration
 
 The project was incredible, it was building something we considered really cool while learning a lot in the process. Lectures taught us about concepts and the labs enabled us to implement them. What was particularly important both about the project and the other labs was dealing with all erroneous problems that came from either the circuit or the launchpad. We learned more from debugging than from constructing, and we believe this is the best part of the labs. Having everything working fine on the first try is bad, actually is horrible, because later, when something does go wrong you would have no idea how to solve it because the problem has become so large that it is extremely tough to pinpoint where the issue is coming from. We spent many hours debugging and understanding how each part of the project worked, and while we sincerely hated those hours, we later realized that it was for the best.. Overall, we are thrilled to have completed this project, it taught us a skillset that we will carry on for a long time. The structure of the project is well organized, the only limitation are the launchpads. 
 
@@ -99,7 +99,7 @@ Through the lab two voltage clamp recording was used to monitor and record the i
 The channels that we expressed in the oocyte to monitor voltage dependence were ShB𐊅6-46, DRK, ShB. ShB natively has C-type inactivation and N-type inactivation. For the ShB𐊅6-46 the ShB was genetically modified inorder for there to be only C-type inactivation. DRK, like the ShB𐊅6-46, only has C-type inactivation. We looked at time constants for holding potential and voltage steps. We additionally looked at inactivation of some channels. 
  For ligand dependence the two channels that we expressed in P2xR1 and TASK2. P2xR1 is a non selective ionotropic channel. The TASK2 channel is a pH dependent K+ channel. For each we looked at the I-V curve and the G-V curve. For P2xR1 we additionally looked at the if the cell desensitized to ATP and looked at the rate at which this occurs.
 Results/Discussion of results:
-A.Passive Properties of membrane:
+## A.Passive Properties of membrane:
 
 ![](images/Picture7.png)
 
@@ -117,7 +117,7 @@ The current is caused by native channels that are already present in the oocyte.
 
     
 
-#### C.Voltage dependence of channel opening: 
+## C.Voltage dependence of channel opening: 
 
 Figure 2:
 ![](images/Picture9.png)	
@@ -151,7 +151,7 @@ Figure 7:
 Figure 6 and figure 7 show the I-V curve and the G-V curve of the ShB𐊅6-46 channels respectively at -60mV holding potential. Comparing the I-V curve of the two holding potential, figure 6 and figure 2, one can observe that there is a great rate of change of the oocyte held at -60 mv versus -80mv. This is due the cell already moving more cation across the membrane when the step is taken from holding the membrane at -60m. Although the recording was effective and captures voltage dependence of the channel, previous recordings were done(which held the membrane potential at -40mv) and from our recording the results differ by about 5pA (Speake et al. 2004).
 We also found the reversal potential to be about -50mV this is in agreement with other recordings (Speake et al. 2004).
 
-### D. Slow C-type inactivation:
+## D. Slow C-type inactivation:
 Figure 8:
 
 ![](images/Picture15.png)
@@ -167,7 +167,7 @@ Figure 10:
 ![](images/Picture17.png)
  
 
-## Time constants for figure 10:
+### Time constants for figure 10:
 Series 1: 2.02secs     	Series 11: 3.12 sec
 Series 2: 2.96 secs    	Series 12: 2.6088 sec
 Series 3: 3.264 secs 	Series 13: 3.45 sec
@@ -178,7 +178,7 @@ Series 7: 2.96 secs   	Series 17: 3.21 sec
 Series 8: 2.76 secs   	Series 18:  3.23 sec
 Series 9: 3.12 secs 
 Series 10: 3.12 secs
-## Time constants for figure 11:
+### Time constants for figure 11:
 Series 1: 2.054 secs 	Series 2: 2.154 sec 
 Series 3: 1.9 secs 	Series 4: 2.054 sec 
 Series 5: 2.234 secs 	Series 6: 3.152 sec  
@@ -186,7 +186,7 @@ Series 7: 3.0 secs	Series 8: 2.54 sec
 Series 9: 2.054 secs	Series 10: 2.02 sec 
 The time constant is different for -80mv versus -60mv due to hyperpolarization causing more channels to become active. For -60mV there is a greater probability for channels to be in their inactive state. For the more negative hold, the negative potential “attracts” the “protein plug ” to be more favorable in an active state, unblocking the channel
 
-E. Fast N-type inactivation in ShB
+## E. Fast N-type inactivation in ShB
 
 Figure 11:
 
@@ -265,7 +265,7 @@ From the data collected, when ATP is present is Erev approximately 18mv. Additio
 From this, it is clear that the P2xR1 current dominates. This is shown by the Erev being very distant from Ecl. From further recordings, we found that P2xR1 does desensitize.  We calculated that the time constant is 1.25 seconds
 
 
-F. Ligand-gated ATP channel
+## F. Ligand-gated ATP channel
 Figure29:
 
 ![](images/Picture35.png)
