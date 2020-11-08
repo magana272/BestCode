@@ -16,11 +16,9 @@ hashtable.o : hashtable.c hashtable.h
 	$(CC) $(CFLAGS) hashtable.c
 
 clean :
-	rm -f *.o philspel testOutput
+	rm -f *.o philspel testOutput yourOutput
 
 test : clean philspel
-	touch testOutput
-	cat sampleInput | ./philspel sampleDictionary > testOutput
+	touch yourOutput
+	cat sampleInput | ./philspel sampleDictionary > yourOutput
 	@echo The following should be empty if there are no problems
-	diff sampleOutput testOutput 2> /dev/null
-	@echo Testing complete
